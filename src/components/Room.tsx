@@ -8,6 +8,11 @@ import { useRouter } from "next/navigation";
 // Layer order from FRONT to BACK for hit-testing
 const INTERACTIVE_ITEMS = [
   {
+    id: "speaker",
+    src: "/Speakers.png",
+    href: "/music",
+  },
+  {
     id: "computer",
     src: "/Computer.png",
     href: "/desktop",
@@ -41,6 +46,9 @@ export default function Room() {
   const containerRef = useRef<HTMLDivElement>(null);
   const contextsRef = useRef<Map<string, CanvasRenderingContext2D>>(new Map());
   const router = useRouter();
+
+  // Highlight both the turntable and speakers when either is active
+  const isMusicActive = activeId === "turntable" || activeId === "speaker";
 
   // 1. Pre-render layers onto offscreen canvas for alpha testing
   useEffect(() => {
@@ -197,7 +205,7 @@ export default function Room() {
         {/* Layer 2: Turntable Table */}
         <div
           className={`absolute inset-0 z-20 pointer-events-none transition duration-150 ${
-            activeId === "turntable"
+            isMusicActive
               ? "brightness-125 drop-shadow-[0_0_4px_rgba(255,255,255,0.8)]"
               : ""
           }`}
@@ -253,6 +261,24 @@ export default function Room() {
           <Image
             src="/Computer.png"
             alt="Computer"
+            fill
+            unoptimized
+            sizes="100vw"
+            className="pixel-art object-contain"
+          />
+        </div>
+
+        {/* Layer 6: Stereo Speakers (Highest Z-Index Layer) */}
+        <div
+          className={`absolute inset-0 z-60 pointer-events-none transition duration-150 ${
+            isMusicActive
+              ? "brightness-125 drop-shadow-[0_0_4px_rgba(255,255,255,0.8)]"
+              : ""
+          }`}
+        >
+          <Image
+            src="/Speakers.png"
+            alt="Speakers"
             fill
             unoptimized
             sizes="100vw"
