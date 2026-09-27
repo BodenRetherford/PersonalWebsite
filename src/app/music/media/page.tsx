@@ -70,7 +70,7 @@ export default async function MediaPage() {
             href="/home"
             className="rounded-md border border-zinc-700 bg-zinc-800/80 px-2.5 py-1 text-xs font-medium text-zinc-300 transition-colors hover:border-zinc-500 hover:text-white"
           >
-            Room
+            Home
           </Link>
         </div>
       </header>

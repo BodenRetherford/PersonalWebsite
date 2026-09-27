@@ -8,28 +8,33 @@ import { useRouter } from "next/navigation";
 // Layer order from FRONT to BACK for hit-testing
 const INTERACTIVE_ITEMS = [
   {
+    id: "camera",
+    src: "/room-assets/Camera.png",
+    href: "/photography",
+  },
+  {
     id: "speaker",
-    src: "/Speakers.png",
+    src: "/room-assets/Speakers.png",
     href: "/music",
   },
   {
     id: "computer",
-    src: "/Computer.png",
+    src: "/room-assets/Computer.png",
     href: "/desktop",
   },
   {
     id: "bookshelf-front",
-    src: "/BookshelfLeft.png",
+    src: "/room-assets/BookshelfLeft.png",
     href: "/library",
   },
   {
     id: "turntable",
-    src: "/Turntable.png",
+    src: "/room-assets/Turntable.png",
     href: "/music",
   },
   {
     id: "bookshelf-back",
-    src: "/BookshelfRight.png",
+    src: "/room-assets/BookshelfRight.png",
     href: "/library",
   },
 ];
@@ -37,7 +42,8 @@ const INTERACTIVE_ITEMS = [
 const MENU_ITEMS = [
   { label: "Library", href: "/library", targetId: "library" },
   { label: "Music & Audio", href: "/music", targetId: "turntable" },
-  { label: "Workstation", href: "/desktop", targetId: "computer" },
+  { label: "Professional Desktop", href: "/desktop", targetId: "computer" },
+  { label: "Photography", href: "/photography", targetId: "camera" },
 ];
 
 export default function Room() {
@@ -174,7 +180,7 @@ export default function Room() {
         {/* Layer 0: Empty Room */}
         <div className="absolute inset-0 z-0 pointer-events-none">
           <Image
-            src="/Room.png"
+            src="/room-assets/Room.png"
             alt="Room Background"
             fill
             priority
@@ -184,7 +190,19 @@ export default function Room() {
           />
         </div>
 
-        {/* Layer 1: Back/Right Bookshelf */}
+        {/* Layer 1: Windows */}
+        <div className="absolute inset-0 z-5 pointer-events-none">
+          <Image
+            src="/room-assets/Windows.png"
+            alt="Windows"
+            fill
+            unoptimized
+            sizes="100vw"
+            className="pixel-art object-contain"
+          />
+        </div>
+
+        {/* Layer 2: Back/Right Bookshelf */}
         <div
           className={`absolute inset-0 z-10 pointer-events-none transition duration-150 ${
             activeId === "bookshelf-back" || activeId === "library"
@@ -193,7 +211,7 @@ export default function Room() {
           }`}
         >
           <Image
-            src="/BookshelfRight.png"
+            src="/room-assets/BookshelfRight.png"
             alt="Back Bookshelf"
             fill
             unoptimized
@@ -202,7 +220,7 @@ export default function Room() {
           />
         </div>
 
-        {/* Layer 2: Turntable Table */}
+        {/* Layer 3: Turntable Table */}
         <div
           className={`absolute inset-0 z-20 pointer-events-none transition duration-150 ${
             isMusicActive
@@ -211,7 +229,7 @@ export default function Room() {
           }`}
         >
           <Image
-            src="/Turntable.png"
+            src="/room-assets/Turntable.png"
             alt="Turntable"
             fill
             unoptimized
@@ -220,7 +238,7 @@ export default function Room() {
           />
         </div>
 
-        {/* Layer 3: Front/Left Bookshelf */}
+        {/* Layer 4: Front/Left Bookshelf */}
         <div
           className={`absolute inset-0 z-30 pointer-events-none transition duration-150 ${
             activeId === "bookshelf-front" || activeId === "library"
@@ -229,7 +247,7 @@ export default function Room() {
           }`}
         >
           <Image
-            src="/BookshelfLeft.png"
+            src="/room-assets/BookshelfLeft.png"
             alt="Front Bookshelf"
             fill
             unoptimized
@@ -238,10 +256,10 @@ export default function Room() {
           />
         </div>
 
-        {/* Layer 4: Desk */}
+        {/* Layer 5: Desk */}
         <div className="absolute inset-0 z-40 pointer-events-none">
           <Image
-            src="/Desk.png"
+            src="/room-assets/Desk.png"
             alt="Desk"
             fill
             unoptimized
@@ -250,7 +268,7 @@ export default function Room() {
           />
         </div>
 
-        {/* Layer 5: Computer */}
+        {/* Layer 6: Computer */}
         <div
           className={`absolute inset-0 z-50 pointer-events-none transition duration-150 ${
             activeId === "computer"
@@ -259,7 +277,7 @@ export default function Room() {
           }`}
         >
           <Image
-            src="/Computer.png"
+            src="/room-assets/Computer.png"
             alt="Computer"
             fill
             unoptimized
@@ -268,7 +286,7 @@ export default function Room() {
           />
         </div>
 
-        {/* Layer 6: Stereo Speakers (Highest Z-Index Layer) */}
+        {/* Layer 7: Stereo Speakers */}
         <div
           className={`absolute inset-0 z-60 pointer-events-none transition duration-150 ${
             isMusicActive
@@ -277,8 +295,36 @@ export default function Room() {
           }`}
         >
           <Image
-            src="/Speakers.png"
+            src="/room-assets/Speakers.png"
             alt="Speakers"
+            fill
+            unoptimized
+            sizes="100vw"
+            className="pixel-art object-contain"
+          />
+        </div>
+
+        {/* Layer 8: Camera */}
+        <div
+          className={`absolute inset-0 z-70 pointer-events-none transition duration-150 ${
+            activeId === "camera" ? "brightness-125 drop-shadow-[0_0_4px_rgba(255,255,255,0.8)]" : ""
+          }`}
+        >
+          <Image
+            src="/room-assets/Camera.png"
+            alt="Camera"
+            fill
+            unoptimized
+            sizes="100vw"
+            className="pixel-art object-contain"
+          />
+        </div>
+
+        {/* Layer 9: Plant and Poster (Frontmost) */}
+        <div className="absolute inset-0 z-80 pointer-events-none">
+          <Image
+            src="/room-assets/Plant+Poster.png"
+            alt="Plant and poster"
             fill
             unoptimized
             sizes="100vw"
