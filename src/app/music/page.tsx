@@ -53,7 +53,7 @@ export default function MusicPage() {
   }, [spotifyData.title, spotifyData.artist, spotifyData.isPlaying]);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between bg-[#0e0e11] p-4 text-zinc-100 sm:p-8">
+    <main className="flex h-screen w-full flex-col items-center justify-between overflow-y-auto overscroll-contain bg-[#0e0e11] p-4 text-zinc-100 sm:p-8">
       {/* ========================================================= */}
       {/* 1. TOP BAR: Spotify Now Playing + Fluid Marquee           */}
       {/* ========================================================= */}

@@ -43,3 +43,46 @@ body {
 .animate-marquee-smooth:hover {
   animation-play-state: paused;
 }
+
+.film-strip {
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgb(113 113 122 / 0.28);
+  border-bottom: 1px solid rgb(113 113 122 / 0.28);
+  background: #18181b;
+  opacity: 0;
+  transform: scaleX(0.12);
+  transform-origin: left center;
+}
+
+.film-strip-visible {
+  animation: film-unroll 900ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.film-perforations {
+  height: 14px;
+  background-color: #27272a;
+  background-image: radial-gradient(circle, #111113 0 3px, transparent 3.5px);
+  background-position: 8px 7px;
+  background-size: 22px 14px;
+}
+
+@keyframes film-unroll {
+  from {
+    opacity: 0;
+    transform: scaleX(0.12);
+  }
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .film-strip,
+  .film-strip-visible {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
